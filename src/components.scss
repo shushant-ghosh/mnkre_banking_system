@@ -1,0 +1,45 @@
+#login {
+  background: rgb(0,44,154);
+  background: linear-gradient(153deg, rgba(0,44,154,1) 0%, rgba(0,91,194,1) 53%, rgba(0,212,255,1) 100%);
+  min-height: 100vh;
+  
+  .Card {
+    background-color: #ffffff28;
+    top: 50%;
+    left:50%;
+    position: absolute;
+  transform: translate(-50%, -50%);
+    width: 30vw;
+    min-height: 50vh;
+    border: 0px solid rgb(161, 161, 161);
+    border-radius: 20px;
+    padding: 20px;
+  }
+  #LoginForm, #SignUpForm {
+    margin: auto;
+    margin-top: 5vh;
+    width: 20vw;
+    .LoginButton{
+      background-color: rgba(0, 47, 150, 0.466);
+      padding: 1em 2em;
+      color: #ffffff;
+      font-weight: bolder;
+    }
+  }
+}
+#pillSelection {
+  li{
+    margin-inline: 2px;
+  }
+  .nav-pills .nav-link {
+    color: #353535;
+    background-color: #cacaca46;
+    border-radius: var(--bs-nav-pills-border-radius);
+}
+  .nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+    color: #000000;
+    background-color: #e7e7e775;
+    font-weight: bolder;
+    transform: scale(1.1);
+}
+}
