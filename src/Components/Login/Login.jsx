@@ -46,11 +46,11 @@ function Login() {
     } else {
       // Redirect to Login details
       if (signUpDetails.password == signUpDetails.confirmPassword) {
-        console.log("userList in else",usersList)
+        console.log("userList in else", usersList);
         createUser({
           name: signUpDetails.username,
           password: signUpDetails.password,
-          isAdmin: usersList?.length>0?false:true
+          isAdmin: usersList?.length > 0 ? false : true,
         });
         message.success("User Registered Successfully");
         setTimeout(() => {
@@ -142,6 +142,9 @@ function Login() {
               <div className="d-flex justify-content-center pt-4">
                 <button
                   class="btn btn-primary LoginButton"
+                  disabled={
+                    loginDetails.username === "" || loginDetails.password === ""
+                  }
                   onClick={(e) => submitForm(e, "Login")}
                 >
                   Login
@@ -210,6 +213,9 @@ function Login() {
               <div className="d-flex justify-content-center pt-4">
                 <button
                   class="btn btn-primary LoginButton"
+                  disabled={
+                    signUpDetails.username === "" || signUpDetails.password === "" || signUpDetails.confirmPassword === ""
+                  }
                   onClick={(e) => submitForm(e, "SignUp")}
                 >
                   Register

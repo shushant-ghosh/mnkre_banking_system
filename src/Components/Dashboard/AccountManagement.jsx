@@ -1,11 +1,109 @@
-import React from 'react'
+import React, { useEffect, useState } from "react";
+import _ from "lodash";
+import { db } from "../../config/firebase";
+import { getDocs, addDoc, collection } from "firebase/firestore";
 
 function AccountManagement() {
+  const accountsListRef = collection(db, "saving-accounts");
+  const [accountsList, setAccountsList] = useState([]);
+  const [accountsBySearch, setAccountsBySearch] = useState([]);
+  const [searchInput, setSearchInput] = useState("");
+
+  const handleSearch = (event) => {
+    let { value } = event.target;
+    console.log({value, accountsList})
+    let filter = accountsList.filter(account => (account.firstName.includes(value) || account.lastName.includes(value) || String(account.accNo).includes(value) || String(account.amount).includes(value)));
+    setSearchInput(value)
+    setAccountsBySearch(filter);
+  };
+
+  useEffect(() => {
+    const getUserList = async () => {
+      // Read the user list
+      try {
+        let data = await getDocs(accountsListRef);
+        data = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+        console.log(data);
+        setAccountsList(data);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+    getUserList();
+  }, []);
   return (
-    <div id='account-management'>
-      AccountManagement
+    <div id="account-management">
+      <div className="contain">
+        <div className="heading">
+          <h1>Accounts Listing</h1>
+        </div>
+        <div className="d-flex flex-column mt-5 gap-2">
+          <label htmlFor="search">Search</label>
+          <input
+            className="form-control searchbox"
+            type="text"
+            name="search"
+            id="search"
+            placeholder="Search by name, account number, or balance"
+            onChange={handleSearch}
+          />
+        </div>
+        <div className="accountsTable">
+          <table className="table table-hover">
+            <thead>
+              <tr>
+                <th>Account Number</th>
+                <th>Name</th>
+                <th>Balance</th>
+                <th>DOB</th>
+                <th>Address</th>
+                <th>Account Status</th>
+                <th>Transactions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {searchInput.length === 0 &&
+                accountsList.map((account, key) => {
+                  return (
+                    <tr key={key}>
+                      <td>{account.accNo}</td>
+                      <td>{account.firstName + " " + account.lastName}</td>
+                      <td>{account.amount}</td>
+                      <td>{account.dob}</td>
+                      <td>{account.address}</td>
+                      <td>{account.accountStatus}</td>
+                      <td>
+                        <button className="btn btn-primary">
+                          View Transactions
+                        </button>
+                      </td>
+                    </tr>
+                  );
+                })}
+              {searchInput.length > 0 &&
+                accountsBySearch.map((account, key) => {
+                  return (
+                    <tr key={key}>
+                      <td>{account.accNo}</td>
+                      <td>{account.firstName + " " + account.lastName}</td>
+                      <td>{account.amount}</td>
+                      <td>{account.dob}</td>
+                      <td>{account.address}</td>
+                      <td>{account.accountStatus}</td>
+                      <td>
+                        <button className="btn btn-primary">
+                          View Transactions
+                        </button>
+                      </td>
+                    </tr>
+                  );
+                })}
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
-  )
+  );
 }
 
-export default AccountManagement
+export default AccountManagement;

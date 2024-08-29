@@ -13,6 +13,10 @@ function Savings() {
     amount: 10000,
     currency: "USD",
     accountStatus: "active",
+    firstName: "",
+    lastName: "",
+    dob: "",
+    address: "",
   });
 
   useEffect(() => {
@@ -138,6 +142,15 @@ function Savings() {
             <div className="d-flex justify-content-center mt-5 pt-4">
               <button
                 class="btn btn-primary LoginButton"
+                disabled={
+                  (formFields.firstName !== undefined &&
+                    formFields.firstName === "") ||
+                  (formFields.lastName !== undefined &&
+                    formFields.lastName === "") ||
+                  (formFields.dob !== undefined && formFields.dob === "") ||
+                  (formFields.address !== undefined &&
+                    formFields.address === "")
+                }
                 onClick={(e) => submitForm(e, "Create")}
               >
                 {"Create Savings Account"}
