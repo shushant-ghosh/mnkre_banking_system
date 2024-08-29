@@ -7,7 +7,7 @@ import { getDocs, addDoc, collection } from "firebase/firestore";
 
 function Savings() {
   const navigate = useNavigate();
-  const userListRefference = collection(db, "banking-system-users");
+  const userListRefference = collection(db, "saving-accounts");
   const [userDetails, setUserDetails] = useState([]);
   const [formFields, setFormFields] = useState({
     amount: 10000,
