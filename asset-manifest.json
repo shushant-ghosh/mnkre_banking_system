@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/mnkre_banking_system/static/css/main.4748f4a0.css",
+    "main.js": "/mnkre_banking_system/static/js/main.b36c464d.js",
+    "static/js/453.94af629c.chunk.js": "/mnkre_banking_system/static/js/453.94af629c.chunk.js",
+    "index.html": "/mnkre_banking_system/index.html",
+    "main.4748f4a0.css.map": "/mnkre_banking_system/static/css/main.4748f4a0.css.map",
+    "main.b36c464d.js.map": "/mnkre_banking_system/static/js/main.b36c464d.js.map",
+    "453.94af629c.chunk.js.map": "/mnkre_banking_system/static/js/453.94af629c.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.4748f4a0.css",
+    "static/js/main.b36c464d.js"
+  ]
+}
