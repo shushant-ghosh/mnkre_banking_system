@@ -59,6 +59,7 @@
 #login,
 #savings,
 #account-management,
+#fund-transfer
  {
   background: rgb(0, 44, 154);
   background: linear-gradient(
@@ -99,7 +100,7 @@
   }
 }
 
-#savings {
+#savings, #fund-transfer {
   width: 100dvw;
   .contain {
     padding: 30px;
@@ -144,7 +145,8 @@ font-weight: bold;
     }
     .accountsTable{
       margin-top: 2em;
-      border: 1px solid #dee2e6;
+      height: 60vh;
+      overflow-y: auto;
     }
   }
 }

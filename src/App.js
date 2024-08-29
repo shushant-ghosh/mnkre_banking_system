@@ -5,6 +5,7 @@ import Signup from "./Components/SignUp/Signup";
 import Dashboard from "./Components/Dashboard/Dashboard";
 import Savings from "./Components/Dashboard/Savings";
 import AccountManagement from "./Components/Dashboard/AccountManagement";
+import FundTransfers from "./Components/Dashboard/FundTransfers";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/create-savings-account" element={<Savings />} />
         <Route path="/account-management" element={<AccountManagement />} />
+        <Route path="/fund-transfer" element={<FundTransfers />} />
       </Routes>
     </BrowserRouter>
   );
