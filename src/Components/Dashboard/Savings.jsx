@@ -1,31 +1,69 @@
 import { message } from "antd";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { json, useNavigate } from "react-router-dom";
-import db from "../../db.json";
+import { db } from "../../config/firebase";
+import { getDocs, addDoc, collection } from "firebase/firestore";
+// import db from "../../db.json";
 
 function Savings() {
   const navigate = useNavigate();
-  const [userDetails, setUserDetails] = useState({
+  const userListRefference = collection(db, "banking-system-users");
+  const [userDetails, setUserDetails] = useState([]);
+  const [formFields, setFormFields] = useState({
     amount: 10000,
     currency: "USD",
     accountStatus: "active",
   });
 
+  const getUserList = async () => {};
+  useEffect(() => {
+    const getUserList = async () => {
+      // Read the user list
+      try {
+        let userList = await getDocs(userListRefference);
+        userList = userList.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+        console.log(userList);
+        setUserDetails(userList);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+    getUserList();
+  }, []);
+
   const handleFormData = (e) => {
     const { name, value } = e.target;
-    setUserDetails({ ...userDetails, [name]: value });
+    setFormFields({ ...formFields, [name]: value });
   };
 
+  const generateUID = () => {
+    try {
+      return userDetails[userDetails.length - 1].accNo + 1;
+    } catch (err) {
+      console.error(err);
+      return "10010000001";
+    }
+  };
+
+  const createNewUser = async (newData) => {
+    try {
+      await addDoc(userListRefference, newData);
+    } catch (error) {
+      console.error("Error adding document: ", error);
+    }
+  };
   const submitForm = (e) => {
     e.preventDefault();
     try {
-      let rawData = JSON.stringify(db, null, 2);
-      rawData = JSON.parse(rawData);
-console.log({rawData})
-
+      let UID = generateUID();
+      let newData = { ...formFields, accNo: UID };
+      console.log(newData);
+      createNewUser(newData);
 
       message.success("Successfully created new Savings account");
-      navigate("/dashboard");
+      setTimeout(() => {
+        navigate("/dashboard");
+      }, 1000);
     } catch (error) {
       console.error(error);
       message.error("Failed to create new Savings account");
