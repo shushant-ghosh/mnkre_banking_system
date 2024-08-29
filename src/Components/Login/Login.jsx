@@ -2,13 +2,18 @@ import React, { useEffect, useState } from "react";
 import "../../components.scss";
 import { message } from "antd";
 import { useNavigate } from "react-router-dom";
+import { getDocs, addDoc, collection } from "firebase/firestore";
+import { db } from "../../config/firebase";
 
 function Login() {
+  const userRef = collection(db, "users");
+
   const [activeTab, setActiveTab] = useState("Login");
+  const [usersList, setUsersList] = useState([]);
   const [loginDetails, setLoginDetails] = useState({});
   const [signUpDetails, setSignUpDetails] = useState({});
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const handlePills = (type) => {
     if (type === "Login") {
@@ -20,17 +25,33 @@ function Login() {
     setSignUpDetails({});
   };
 
+  const createUser = async (credentials) => await addDoc(userRef, credentials);
+
   const submitForm = (e, type) => {
     e.preventDefault();
     console.log(type);
     console.log({ loginDetails, signUpDetails });
     if (type === "Login") {
-      // Redirect to Dashboard
-      navigate("/dashboard");
-
+      // Redirect to Dashboard if credentials are present in DB
+      let filterData = usersList.filter(
+        (user) =>
+          user.name === loginDetails.username &&
+          user.password === loginDetails.password
+      );
+      if (filterData.length > 0) {
+        navigate("/dashboard");
+      } else {
+        message.error("Invalid Credentials!");
+      }
     } else {
       // Redirect to Login details
       if (signUpDetails.password == signUpDetails.confirmPassword) {
+        console.log("userList in else",usersList)
+        createUser({
+          name: signUpDetails.username,
+          password: signUpDetails.password,
+          isAdmin: usersList?.length>0?false:true
+        });
         message.success("User Registered Successfully");
         setTimeout(() => {
           handlePills("Login");
@@ -40,6 +61,22 @@ function Login() {
       }
     }
   };
+
+  useEffect(() => {
+    const getUsersList = async () => {
+      try {
+        let users = await getDocs(userRef);
+        let usersData = users.docs.map((doc) => ({
+          ...doc.data(),
+          id: doc.id,
+        }));
+        setUsersList(usersData);
+      } catch (error) {
+        console.log("Error getting documents: ", error);
+      }
+    };
+    getUsersList();
+  }, []);
 
   return (
     <div id="login" className="fluid-container">

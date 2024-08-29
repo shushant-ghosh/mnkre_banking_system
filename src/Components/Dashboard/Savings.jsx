@@ -15,7 +15,6 @@ function Savings() {
     accountStatus: "active",
   });
 
-  const getUserList = async () => {};
   useEffect(() => {
     const getUserList = async () => {
       // Read the user list
@@ -38,7 +37,7 @@ function Savings() {
 
   const generateUID = () => {
     try {
-      return userDetails[userDetails.length - 1].accNo + 1;
+      return parseInt(userDetails[0].accNo) + 1;
     } catch (err) {
       console.error(err);
       return "10010000001";
