@@ -33,7 +33,7 @@ function Dashboard() {
         <h2>Fund Transfers</h2>
       </div>
       <div className="card">
-        <h2>More Coming...</h2>
+        <h2>Currency Transfer</h2>
       </div>
     </div>
   )
