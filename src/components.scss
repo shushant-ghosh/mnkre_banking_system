@@ -1,25 +1,22 @@
 #login {
-  background: rgb(0,44,154);
-  background: linear-gradient(153deg, rgba(0,44,154,1) 0%, rgba(0,91,194,1) 53%, rgba(0,212,255,1) 100%);
-  min-height: 100vh;
-  
   .Card {
     background-color: #ffffff28;
     top: 50%;
-    left:50%;
+    left: 50%;
     position: absolute;
-  transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
     width: 30vw;
     min-height: 50vh;
     border: 0px solid rgb(161, 161, 161);
     border-radius: 20px;
     padding: 20px;
   }
-  #LoginForm, #SignUpForm {
+  #LoginForm,
+  #SignUpForm {
     margin: auto;
     margin-top: 5vh;
     width: 20vw;
-    .LoginButton{
+    .LoginButton {
       background-color: rgba(0, 47, 150, 0.466);
       padding: 1em 2em;
       color: #ffffff;
@@ -27,19 +24,86 @@
     }
   }
 }
+
 #pillSelection {
-  li{
+  li {
     margin-inline: 2px;
   }
   .nav-pills .nav-link {
     color: #353535;
     background-color: #cacaca46;
     border-radius: var(--bs-nav-pills-border-radius);
-}
-  .nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+  }
+  .nav-pills .nav-link.active,
+  .nav-pills .show > .nav-link {
     color: #000000;
     background-color: #e7e7e775;
     font-weight: bolder;
     transform: scale(1.1);
+  }
 }
+
+#dashboard,
+#login,
+#savings {
+  background: rgb(0, 44, 154);
+  background: linear-gradient(
+    153deg,
+    rgba(0, 44, 154, 1) 0%,
+    rgba(0, 91, 194, 1) 53%,
+    rgba(0, 212, 255, 1) 100%
+  );
+  height: 100dvh;
+}
+
+#dashboard {
+  padding: 50px;
+  gap: 20px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  .card {
+    background-color: #ffffff28;
+
+    width: 20vw;
+    height: 35vh;
+    border: 0px solid rgb(161, 161, 161);
+    border-radius: 20px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    h2 {
+      color: #ffffff;
+      text-wrap: wrap;
+    }
+    p {
+      color: #6c757d;
+    }
+  }
+}
+
+#savings {
+  width: 100dvw;
+  .contain {
+    padding: 30px;
+    border-radius: 20px;
+    background-color: #ffffff;
+    top: 5%;
+    left: 30%;
+    right: 30%;
+    bottom: 5%;
+    position: absolute;
+    width: 40dvw;
+    height: 90dvh;
+
+    .form{
+      margin-top: 3em;
+      textarea {
+        max-height: 24vh;
+      }
+    }
+  }
 }

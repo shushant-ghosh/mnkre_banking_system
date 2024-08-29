@@ -3,6 +3,7 @@ import "./components.scss";
 import Login from "./Components/Login/Login";
 import Signup from "./Components/SignUp/Signup";
 import Dashboard from "./Components/Dashboard/Dashboard";
+import Savings from "./Components/Dashboard/Savings";
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/create-savings-account" element={<Savings />} />
       </Routes>
     </BrowserRouter>
   );

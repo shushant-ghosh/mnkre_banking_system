@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
 import "../../components.scss";
 import { message } from "antd";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
   const [activeTab, setActiveTab] = useState("Login");
   const [loginDetails, setLoginDetails] = useState({});
   const [signUpDetails, setSignUpDetails] = useState({});
+
+  const navigate = useNavigate()
 
   const handlePills = (type) => {
     if (type === "Login") {
@@ -23,6 +26,8 @@ function Login() {
     console.log({ loginDetails, signUpDetails });
     if (type === "Login") {
       // Redirect to Dashboard
+      navigate("/dashboard");
+
     } else {
       // Redirect to Login details
       if (signUpDetails.password == signUpDetails.confirmPassword) {
