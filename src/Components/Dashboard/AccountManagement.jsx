@@ -2,8 +2,11 @@ import React, { useEffect, useState } from "react";
 import _ from "lodash";
 import { db } from "../../config/firebase";
 import { getDocs, addDoc, collection } from "firebase/firestore";
+import { useNavigate } from "react-router-dom";
 
 function AccountManagement() {
+  const navigate = useNavigate();
+
   const accountsListRef = collection(db, "saving-accounts");
   const [accountsList, setAccountsList] = useState([]);
   const [accountsBySearch, setAccountsBySearch] = useState([]);
@@ -11,10 +14,27 @@ function AccountManagement() {
 
   const handleSearch = (event) => {
     let { value } = event.target;
-    console.log({value, accountsList})
-    let filter = accountsList.filter(account => (account.firstName.includes(value) || account.lastName.includes(value) || String(account.accNo).includes(value) || String(account.amount).includes(value)));
-    setSearchInput(value)
+    console.log({ value, accountsList });
+    let filter = accountsList.filter(
+      (account) =>
+        account.firstName.includes(value) ||
+        account.lastName.includes(value) ||
+        String(account.accNo).includes(value) ||
+        String(account.amount).includes(value)
+    );
+    setSearchInput(value);
     setAccountsBySearch(filter);
+  };
+
+  const redirect2 = (type, id) => {
+    console.log("Click");
+    switch (type) {
+      case "transactions":
+        navigate("/transactions/" + id);
+        break;
+      default:
+        break;
+    }
   };
 
   useEffect(() => {
@@ -49,7 +69,7 @@ function AccountManagement() {
           />
         </div>
         <div className="accountsTable">
-          <table className="table table-hover">
+          <table className="table">
             <thead>
               <tr>
                 <th>Account Number</th>
@@ -73,7 +93,10 @@ function AccountManagement() {
                       <td>{account.address}</td>
                       <td>{account.accountStatus}</td>
                       <td>
-                        <button className="btn btn-primary">
+                        <button
+                          className="btn btn-primary"
+                          onClick={() => redirect2("transactions", account.accNo)}
+                        >
                           View Transactions
                         </button>
                       </td>
@@ -91,7 +114,10 @@ function AccountManagement() {
                       <td>{account.address}</td>
                       <td>{account.accountStatus}</td>
                       <td>
-                        <button className="btn btn-primary">
+                        <button
+                          className="btn btn-primary"
+                          onClick={() => redirect2("transactions", account.accNo)}
+                        >
                           View Transactions
                         </button>
                       </td>

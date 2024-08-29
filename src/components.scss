@@ -59,7 +59,8 @@
 #login,
 #savings,
 #account-management,
-#fund-transfer
+#fund-transfer,
+#transactions
  {
   background: rgb(0, 44, 154);
   background: linear-gradient(
@@ -100,7 +101,7 @@
   }
 }
 
-#savings, #fund-transfer {
+#savings, #fund-transfer, #transactions {
   width: 100dvw;
   .contain {
     padding: 30px;

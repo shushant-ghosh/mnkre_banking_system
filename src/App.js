@@ -6,6 +6,7 @@ import Dashboard from "./Components/Dashboard/Dashboard";
 import Savings from "./Components/Dashboard/Savings";
 import AccountManagement from "./Components/Dashboard/AccountManagement";
 import FundTransfers from "./Components/Dashboard/FundTransfers";
+import Transactions from "./Components/Dashboard/Transactions";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/create-savings-account" element={<Savings />} />
         <Route path="/account-management" element={<AccountManagement />} />
         <Route path="/fund-transfer" element={<FundTransfers />} />
+        <Route path={`/transactions/:id`} element={<Transactions />} />
       </Routes>
     </BrowserRouter>
   );
